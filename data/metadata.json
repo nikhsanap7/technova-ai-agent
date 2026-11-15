@@ -1,0 +1,118 @@
+{
+  "system": "TechNova GmbH Enterprise API (fictional)",
+  "operations": [
+    {
+      "tool_name": "get_customer",
+      "description": "Retrieve the details of one customer by customer ID.",
+      "endpoint": "/customers/{customer_id}",
+      "method": "GET",
+      "access": "read",
+      "parameters": {
+        "customer_id": {"type": "integer", "required": true, "description": "Numeric customer ID, e.g. 1025"}
+      },
+      "keywords": ["customer", "client", "company", "details", "find", "lookup", "id"],
+      "examples": ["Find customer 1025", "Show details of customer 1027"]
+    },
+    {
+      "tool_name": "search_customers",
+      "description": "Search customers by country and/or status. Without filters returns all customers.",
+      "endpoint": "/customers",
+      "method": "GET",
+      "access": "read",
+      "parameters": {
+        "country": {"type": "string", "required": false, "description": "Country name, e.g. Germany"},
+        "status": {"type": "string", "required": false, "description": "Active or Inactive"}
+      },
+      "keywords": ["customers", "list", "country", "status", "active", "inactive", "german", "germany", "uk", "usa"],
+      "examples": ["List all German customers", "Show inactive customers"]
+    },
+    {
+      "tool_name": "get_order",
+      "description": "Retrieve one order by order ID, including customer company and country.",
+      "endpoint": "/orders/{order_id}",
+      "method": "GET",
+      "access": "read",
+      "parameters": {
+        "order_id": {"type": "integer", "required": true, "description": "Numeric order ID, e.g. 5001"}
+      },
+      "keywords": ["order", "id", "details", "show", "lookup", "find"],
+      "examples": ["Show order 5003", "Get details of order 5001"]
+    },
+    {
+      "tool_name": "search_orders",
+      "description": "Search orders by status, customer ID, customer country or customer company name. Filters can be combined.",
+      "endpoint": "/orders",
+      "method": "GET",
+      "access": "read",
+      "parameters": {
+        "status": {"type": "string", "required": false, "description": "Pending, Processing, Delivered or Cancelled"},
+        "customer_id": {"type": "integer", "required": false, "description": "Customer ID"},
+        "country": {"type": "string", "required": false, "description": "Customer country"},
+        "company": {"type": "string", "required": false, "description": "Customer company name (partial match)"}
+      },
+      "keywords": ["orders", "pending", "processing", "delivered", "cancelled", "status", "country", "company", "customer", "belonging", "german", "germany"],
+      "examples": ["Show all pending orders", "Find all pending orders from German customers", "Find all orders belonging to ABC Technologies GmbH"]
+    },
+    {
+      "tool_name": "update_order_status",
+      "description": "WRITE: change the status of an order. Requires user confirmation.",
+      "endpoint": "/orders/{order_id}/status",
+      "method": "PATCH",
+      "access": "write",
+      "parameters": {
+        "order_id": {"type": "integer", "required": true, "description": "Numeric order ID"},
+        "status": {"type": "string", "required": true, "description": "New status: Pending, Processing, Delivered or Cancelled"}
+      },
+      "keywords": ["update", "change", "mark", "set", "modify", "cancel", "order", "status", "delivered", "write"],
+      "examples": ["Mark order 5001 as Delivered", "Change order 5003 to Processing"]
+    },
+    {
+      "tool_name": "search_products",
+      "description": "List products with price and stock. Can filter by name or by stock strictly below a threshold (low inventory).",
+      "endpoint": "/products",
+      "method": "GET",
+      "access": "read",
+      "parameters": {
+        "name": {"type": "string", "required": false, "description": "Product name (partial match)"},
+        "stock_below": {"type": "integer", "required": false, "description": "Only products with stock strictly less than this number"}
+      },
+      "keywords": ["products", "product", "stock", "low", "inventory", "units", "less", "below", "price", "list"],
+      "examples": ["Which products have less than 10 units in stock?", "Which products have low inventory?"]
+    },
+    {
+      "tool_name": "check_inventory",
+      "description": "Check stock level and price of one product by exact name.",
+      "endpoint": "/products/{name}",
+      "method": "GET",
+      "access": "read",
+      "parameters": {
+        "product_name": {"type": "string", "required": true, "description": "Exact product name, e.g. Laptop"}
+      },
+      "keywords": ["inventory", "stock", "level", "available", "availability", "how many", "price", "check"],
+      "examples": ["How many laptops are in stock?", "Check inventory for Server"]
+    },
+    {
+      "tool_name": "search_invoices",
+      "description": "Search invoices by customer ID and/or payment status (Paid or Unpaid).",
+      "endpoint": "/invoices",
+      "method": "GET",
+      "access": "read",
+      "parameters": {
+        "customer_id": {"type": "integer", "required": false, "description": "Customer ID"},
+        "payment_status": {"type": "string", "required": false, "description": "Paid or Unpaid"}
+      },
+      "keywords": ["invoices", "invoice", "paid", "payment", "customer", "billing", "list"],
+      "examples": ["Show invoices of customer 1025", "Which invoices are paid?"]
+    },
+    {
+      "tool_name": "search_unpaid_invoices",
+      "description": "Return all invoices whose payment status is Unpaid.",
+      "endpoint": "/invoices?payment_status=Unpaid",
+      "method": "GET",
+      "access": "read",
+      "parameters": {},
+      "keywords": ["unpaid", "outstanding", "overdue", "invoices", "open", "owed"],
+      "examples": ["Show all unpaid invoices", "Which invoices are outstanding?"]
+    }
+  ]
+}
